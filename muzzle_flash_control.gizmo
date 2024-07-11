@@ -1,0 +1,268 @@
+#! D:/Nuke10.5v4/nuke-10.5.4.dll -nx
+version 10.5 v4
+Gizmo {
+ tile_color 0xda7700ff
+ gl_color 0xff
+ label "frame \[value first]"
+ lock_connections true
+ addUserKnob {20 Controls}
+ addUserKnob {26 Premult l "@b;Premult"}
+ addUserKnob {41 disable_1 l Disable T Premult1.disable}
+ addUserKnob {26 ""}
+ addUserKnob {26 TimeClip l "@b;TimeClip"}
+ addUserKnob {41 time_offset l "time offset (frames)" T TimeOffset1.time_offset}
+ addUserKnob {41 first l "frame range" T TimeClip1.first}
+ addUserKnob {41 before l "" -STARTLINE T TimeClip1.before}
+ addUserKnob {41 last l "" -STARTLINE T TimeClip1.last}
+ addUserKnob {41 after l "" -STARTLINE T TimeClip1.after}
+ addUserKnob {26 ""}
+ addUserKnob {26 Position l "@b;Repo"}
+ addUserKnob {41 snap_menu l "" +STARTLINE T Card3D1.snap_menu}
+ addUserKnob {41 translate T Card3D1.translate}
+ addUserKnob {41 rotate T Card3D1.rotate}
+ addUserKnob {41 scaling l scale T Card3D1.scaling}
+ addUserKnob {41 uniform_scale l "uniform scale" T Card3D1.uniform_scale}
+ addUserKnob {41 pivot T Card3D1.pivot}
+ addUserKnob {41 motionblur T Card3D1.motionblur}
+ addUserKnob {41 shutter T Card3D1.shutter}
+ addUserKnob {26 ""}
+ addUserKnob {26 Reformat l "@b;Reformat"}
+ addUserKnob {41 format l "output format" T Reformat1.format}
+ addUserKnob {26 ""}
+ addUserKnob {26 Glow l "@b;Glow"}
+ addUserKnob {26 OutGlow l "@b;OutGlow:"}
+ addUserKnob {41 size T Glow_Exponential.size}
+ addUserKnob {41 intensity T Glow_Exponential.intensity}
+ addUserKnob {41 falloff T Glow_Exponential.falloff}
+ addUserKnob {41 range T Glow_Exponential.range}
+ addUserKnob {41 white l Tint T Grade1.white}
+ addUserKnob {26 ""}
+ addUserKnob {26 Highlights l "@b;Highlights:"}
+ addUserKnob {41 size_1 l size T Glow_Exponential1.size}
+ addUserKnob {41 intensity_1 l intensity T Glow_Exponential1.intensity}
+ addUserKnob {41 falloff_1 l falloff T Glow_Exponential1.falloff}
+ addUserKnob {41 range_1 l range T Glow_Exponential1.range}
+ addUserKnob {41 whitepoint T Grade2.whitepoint}
+ addUserKnob {26 ""}
+ addUserKnob {26 Createdby l "Created by" T "Lurival Jones 2024"}
+ addUserKnob {20 FinalTouch l "Final Touch"}
+ addUserKnob {26 Noise l "@b;Noise Stencil" T ""}
+ addUserKnob {26 suggestion l "" +STARTLINE T "You could use this section to stencil a bit your muzzle flash, and then create some texture avoiding flat situations"}
+ addUserKnob {26 ""}
+ addUserKnob {41 size_2 l x/ysize T Noise1.size}
+ addUserKnob {41 zoffset l z T Noise1.zoffset}
+ addUserKnob {41 lacunarity T Noise1.lacunarity}
+ addUserKnob {41 gain T Noise1.gain}
+ addUserKnob {41 gamma T Noise1.gamma}
+ addUserKnob {41 transform T Noise1.transform}
+ addUserKnob {26 ""}
+ addUserKnob {41 translate_1 l translate T Noise1.translate}
+ addUserKnob {26 ""}
+ addUserKnob {26 Blur l "@b;Blur Size"}
+ addUserKnob {41 size_3 l size T Blur2.size}
+ addUserKnob {26 ""}
+ addUserKnob {26 E l "@b;Enable/Disable"}
+ addUserKnob {41 disable_2 l Disable T Noise1.disable}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -89
+  ypos 332
+ }
+ Premult {
+  name Premult1
+  xpos -89
+  ypos 372
+ }
+ TimeOffset {
+  time ""
+  name TimeOffset1
+  xpos -89
+  ypos 450
+ }
+ TimeClip {
+  time ""
+  origlast 1
+  origset true
+  name TimeClip1
+  xpos -89
+  ypos 530
+ }
+ Card3D {
+  name Card3D1
+  xpos -89
+  ypos 610
+ }
+ Reformat {
+  name Reformat1
+  xpos -89
+  ypos 686
+ }
+ Dot {
+  name Dot1
+  xpos -55
+  ypos 780
+ }
+set N6a68b800 [stack 0]
+ Dot {
+  name Dot2
+  xpos 255
+  ypos 780
+ }
+ Keyer {
+  operation "luminance key"
+  name Keyer1
+  xpos 221
+  ypos 1395
+ }
+ Blur {
+  channels alpha
+  size 4
+  name Blur1
+  label "\[value size]"
+  xpos 221
+  ypos 1460
+ }
+ Dot {
+  name Dot6
+  xpos 255
+  ypos 1711
+ }
+push $N6a68b800
+ Dot {
+  name Dot3
+  xpos -55
+  ypos 939
+ }
+set N6a68a400 [stack 0]
+ Dot {
+  name Dot4
+  xpos -355
+  ypos 939
+ }
+ Glow_Exponential {
+  name Glow_Exponential
+  label Out_Glow
+  xpos -389
+  ypos 1033
+ }
+ Reformat {
+  name Reformat2
+  xpos -389
+  ypos 1104
+ }
+ set C64de9400 [stack 0]
+ Grade {
+  name Grade1
+  xpos -389
+  ypos 1167
+ }
+ Dot {
+  name Dot5
+  xpos -355
+  ypos 1270
+ }
+push $N6a68a400
+ Merge2 {
+  inputs 2
+  operation screen
+  name Merge1
+  label "\[value mix]"
+  xpos -89
+  ypos 1260
+ }
+ Dot {
+  name Dot7
+  xpos -55
+  ypos 1406
+ }
+set N6a8cf800 [stack 0]
+ Dot {
+  name Dot8
+  xpos -355
+  ypos 1406
+ }
+ Glow_Exponential {
+  name Glow_Exponential1
+  label Inside
+  xpos -389
+  ypos 1501
+ }
+clone $C64de9400 {
+  xpos -389
+  ypos 1573
+  selected false
+ }
+ Grade {
+  name Grade2
+  xpos -389
+  ypos 1634
+ }
+ Dot {
+  name Dot9
+  xpos -355
+  ypos 1711
+ }
+push $N6a8cf800
+ Merge2 {
+  inputs 2+1
+  operation screen
+  name Merge2
+  label "\[value mix]"
+  xpos -89
+  ypos 1701
+ }
+ Dot {
+  name Dot10
+  xpos -55
+  ypos 1920
+ }
+set N6aadcc00 [stack 0]
+ Dot {
+  name Dot11
+  xpos -359
+  ypos 1920
+ }
+push 0
+ Noise {
+  inputs 1+1
+  center {960 540}
+  name Noise1
+  xpos -393
+  ypos 2021
+ }
+ Dilate {
+  channels alpha
+  size -2
+  name Dilate1
+  xpos -393
+  ypos 2083
+ }
+ Blur {
+  channels alpha
+  name Blur2
+  label "\[value size]"
+  xpos -393
+  ypos 2163
+ }
+ Dot {
+  name Dot12
+  xpos -359
+  ypos 2255
+ }
+push $N6aadcc00
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge3
+  label "\[value mix]"
+  xpos -89
+  ypos 2245
+ }
+ Output {
+  name Output1
+  xpos -89
+  ypos 2345
+ }
+end_group
